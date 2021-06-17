@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^([a-z_]+)\/(\d+)\/(\d+)\/(\d+).(mvt|pbf)$ index.php [NC]
