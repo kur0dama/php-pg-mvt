@@ -1,7 +1,7 @@
 <?php
 /*
 Ported from
-https://github.com/pramsey/minimal-mvt/blob/master/minimal-mvt.py
+https://github.com/pramsey/minimal-mvt/
 */
 
 class tile_request_handler {
@@ -89,6 +89,7 @@ class tile_request_handler {
         $env_subquery = $this->envelope_to_bounds_sql($env);
         // Materialize the bounds
         // Select the relevant geometry and clip to MVT bounds
+        //
         // Convert to MVT format
         $sql = 'WITH bounds AS ( SELECT '.$env_subquery.' AS geom, '.$env_subquery.'::box2d AS b2d ), ';
         $sql = $sql.'mvtgeom AS ( ';

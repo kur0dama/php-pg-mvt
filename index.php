@@ -39,7 +39,6 @@ class controller {
      
      private $db;
 
-     // receives parsed URI params, 
      public function __construct($db, $params) {
           $this->db = $db;
           $this->params = $params;
@@ -53,6 +52,7 @@ class controller {
           }
      }
 
+     // initialize tile_request_handler, request tiles based on params
      private function get_results() {
           $handler = new tile_request_handler($this->db, $this->params);
           $result = $handler->pull_mvt();
@@ -87,8 +87,10 @@ $params = array_slice($uri,2);
 // pulls from sample .ini file to get DB connection details
 $ini = parse_ini_file('db_params.ini');
 
+// Content-Type header assumes you are serving vector tiles; if you are serving tiles
+// If you are server GeoJSON, modify accordingly
 if ($_SERVER["REQUEST_METHOD"]=='GET') {
-    //header("Content-Type: application/vnd.mapbox-vector-tile");
+    header("Content-Type: application/vnd.mapbox-vector-tile");
     $dbcon = new dbcon($ini);
     $controller = new controller($dbcon->get_connection(), $params);
     $controller->run_query();
